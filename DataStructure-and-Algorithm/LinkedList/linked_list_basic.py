@@ -13,18 +13,15 @@ class LinkedList:
             node = node.next
         return "->".join(data)
 
-    def __iter__(self):
-        return self
+    def __len__(self):
+        return self.size()
 
-    def __next__(self):
+    def __iter__(self):
         node = self.__head
         while node is not None:
             yield node.data
             node = node.next
         raise StopIteration
-
-    def __len__(self):
-        return self.size()
 
     def size(self):
         size = 0

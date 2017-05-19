@@ -52,8 +52,7 @@ class BinarySearchTree:
     @staticmethod
     def is_binary_search_tree(root):
         if root is None:
-            return false
-        # 1 2 3 5 4 6 7 8
+            return False
         nodes = []
         self.__inorder_traverse(root, nodes)
         for i in range(len(nodes)-1):
@@ -61,11 +60,26 @@ class BinarySearchTree:
                 return False
         return True
 
-    def __init__(self, val=None):
-        if val:
-            self.__root = BinarySearchTree.Node(val)
-        else:
-            self.__root = None
+    def __init__(self):
+        self.__root = None
+
+    def __len__(self):
+        return self.get_node_count()
+
+    def __del__(self):
+        self.delete_tree()
+
+    def __contains__(self, val):
+        return self.is_in_tree(val)
+
+    def __iter__(self):
+        return self.__next(self.__root)
+
+    def __next(self, root):
+        if root:
+            yield from self.__next(root.left)
+            yield root.val
+            yield from self.__next(root.right)
 
     # insert value into tree
     def insert(self, val):
@@ -88,9 +102,6 @@ class BinarySearchTree:
                     return
         else:
             self.__root = BinarySearchTree.Node(val)
-
-    def __len__(self):
-        return self.get_node_count()
 
     # get count of values stored
     def get_node_count(self):
@@ -121,14 +132,8 @@ class BinarySearchTree:
         arr.append(str(root.val))
         self.__inorder_traverse(root.right, arr)
 
-    def __del__(self):
-        self.delete_tree()
-
     def delete_tree(self):
         self.__root = None
-
-    def __contains__(self, val):
-        return self.is_in_tree(val)
 
     # returns true if given value exists in the tree
     def is_in_tree(self, val):
@@ -179,6 +184,13 @@ class BinarySearchTree:
         if root is None:
             return
 
+        # node has 2 children
+        if root.left and root.right:
+            successor = self.__get_min(root.right)
+            root.val = successor.val
+            # set root to sucessor and delete by no child or one child process
+            root = successor
+
         # node doesn't have any child
         if not root.left and not root.right:
             if root.parent is None:
@@ -187,16 +199,7 @@ class BinarySearchTree:
                 root.parent.left = None
             else:
                 root.parent.right = None
-        elif root.left and root.right:
-            successor = self.__get_min(root.right)
-            root.val = successor.val
-            child = successor.right
-            if child:
-                child.parent = successor.parent
-            if successor.parent.left is successor:
-                successor.parent.left = child
-            else:
-                successor.parent.right = child
+        # node have one child
         else:
             child = root.left if root.left else root.right
             child.parent = root.parent
@@ -212,13 +215,14 @@ class BinarySearchTree:
         if not self.__root:
             return None
 
-        # find deepest ancestor where value is in left subtree
+        # go to the nearest ancestor where given value is in left subtree
         successor = None
         root = self.__root
         while root:
             if val < root.val:
                 successor = root
                 root = root.left
+            # if we find the node of the val, we search its right substree
             else:
                 root = root.right
         if successor is None:
