@@ -15,7 +15,7 @@ def intro_sort_imp(arr, max_depth, lo, hi):
     if n <= 1:
         return
     elif max_depth == 0:
-        heap_sort_(arr, lo, hi)
+        heap_sort_imp(arr, lo, hi)
     else:
         pivot = partition(arr, lo, hi)
         intro_sort_imp(arr, max_depth - 1, lo, pivot - 1)

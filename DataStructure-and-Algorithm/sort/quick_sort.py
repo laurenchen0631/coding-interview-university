@@ -10,10 +10,10 @@ def quick_sort(arr):
     sort(arr, 0, len(arr) - 1)
 
 
-# select the kth largest item in unsorted array
+# select the kth(0-base) largest item in unsorted array
 # average case: O(N)
-def select_sort(arr, k):
-    arr = arr[:]
+def quick_select(arr, k):
+    arr = a rr[:]
     random.shuffle(arr)
     lo = 0
     hi = len(arr) - 1
@@ -32,13 +32,18 @@ def partition(a, lo, hi):
     i = lo + 1
     j = hi
     while i <= j:
+        # a[i] <= pivot < a[j]
         if a[i] <= a[lo]:
             i += 1
         elif a[j] > a[lo]:
             j -= 1
+        # a[j] < pivot < a[i]
         else:
             a[i], a[j] = a[j], a[i]
-    a[lo], a[j] = a[j], a[lo]
+            i += 1
+            j -= 1
+    if lo != j:
+        a[lo], a[j] = a[j], a[lo]
     return j
 
 
@@ -46,7 +51,11 @@ def three_way_partition(a, lo, hi):
     lt = lo
     gt = hi
     v = a[lo]
-    i = lo
+    i = lo + 1
+    # a[i] is unsorted item
+    # a[lo] ~ a[lt - 1] is all item less then pivot
+    # a[gt + 1] ~ a[hi] is all item larger than pivit
+    # a[lt] ~ a[i-1] is all item equals pivot. gt == i - 1 when process stop
     while i <= gt:
         if a[i] < v:
             a[lt], a[i] = a[i], a[lt]

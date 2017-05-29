@@ -40,15 +40,15 @@ def merge_sort_optimization(arr):
     sort(arr, aux, 0, len(arr) - 1)
 
 
-def sort_recursive(a):
+def sort_recursive(arr):
     # aux = [None] * len(a)
     sz = 1
-    while sz < n:
+    while sz < len(arr):
         lo = 0
         while lo < len(a) - sz:
-            merge(a, lo, lo+sz-1, min(lo+sz+sz-1, N - 1))
+            merge(a, lo, lo+sz-1, min(lo+sz+sz-1, len(arr) - 1))
             lo += (sz + sz)
-        sz = sz + sz
+        sz += sz
 
 
 def merge_sort(arr):
