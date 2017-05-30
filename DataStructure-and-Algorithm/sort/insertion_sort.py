@@ -1,3 +1,4 @@
+# insertion python : 0.2*O(n^2)
 def insertion_sort(arr):
     insertion_sort_imp(arr, 0, len(arr) - 1)
 

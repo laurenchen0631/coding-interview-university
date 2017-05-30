@@ -1,6 +1,7 @@
 from insertion_sort import insertion_sort_imp
 
 
+# Mergesort in python = 2.2nlg(n)
 def merge_sort_optimization(arr):
     # mergesort has too much overhead for tiny subarrays
     # if less than 7 items use insertion sort

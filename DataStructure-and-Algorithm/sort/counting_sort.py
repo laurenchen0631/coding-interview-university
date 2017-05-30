@@ -12,8 +12,11 @@ def counting_sort(nums):
         total += count
 
     # keep sorted items stable
-    y = [None] * len(nums)
+    aux = [None] * len(nums)
     for num in nums:
-        y[counts[num]] = num
+        aux[counts[num]] = num
         counts[num] += 1
-    return y
+
+    # put it back
+    for i in range(len(nums)):
+        nums[i] = aux[i]
