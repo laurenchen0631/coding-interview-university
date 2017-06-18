@@ -885,8 +885,8 @@ Graphs can be used to represent many problems in computer science, so this secti
     - DFS-based algorithms (see Aduni videos above):
         - [x] check for cycle (needed for topological sort, since we'll check for cycle before starting)
         - [x] topological sort
-        - [ ] count connected components in a graph
-        - [ ] list strongly connected components
+        - [x] count connected components in a graph
+        - [x] list strongly connected components
         - [x] check for bipartite graph
 
 You'll get more graph practice in Skiena's book (see Books section below) and the interview books

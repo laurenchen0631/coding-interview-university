@@ -91,6 +91,9 @@ class MatrixGraph(Graph):
     def __getitem__(self, key):
         return self.neighbors(key)
 
+    def __contains__(self, key):
+        return key in self.__label_index
+
     def print(self):
         for row in self.__graph:
             print(row)
