@@ -51,5 +51,3 @@ class Graph:
     # sets the value associated with the edge (x, y) to v.
     def set_edge_value(self, v1, v2, data):
         self.edge_data[(v1, v2)] = data
-
-

@@ -53,7 +53,6 @@ def SCC(graph):
         while to_visit:
             v = to_visit.pop()
             time += 1
-            print(time, v)
             if v not in entry_time:
                 entry_time[v] = time
                 to_visit.append(v)
